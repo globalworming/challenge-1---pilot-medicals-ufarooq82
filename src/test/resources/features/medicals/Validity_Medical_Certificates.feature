@@ -1,8 +1,7 @@
 Feature:Certificate expiry
   In order to encourage pilots to renew their medical examinations on time in a fair manner
   As an airline regulator
-  I want to pilots to be downgraded to the next lowest status if they don't renew their medicals drops to 3rd class for 48 months after 12 months
-
+  I want to pilots to be downgraded to the next lowest status if they don't renew their medicals drops to 3rd class for 48 months after 12 months # is not easy to read imho
 
   Scenario Outline: : Medical pilots license expiry rule, must renew their licenses
 
@@ -13,6 +12,17 @@ Feature:Certificate expiry
     And   <Current Date>
     Then  his license status should be  <Eligible or Not Eligible>
     And   his license should be  <Not Dropped or Drops Once Expired>
+
+"""
+* hard to understand for me. maybe add more fluff, "and they were born <DOB> and the license was issued <Issue Date>"
+* "<Not Dropped or Drops Once Expired>" does not make much sense i thing. "dropped or not dropped" is always true... maybe you could change that to <actual class> and <actual expiry> as a "quick" fix
+      | Class | DOB        | Issue Date       | Expires     | Current Date | Is Expired | actual class | actual expiry date |
+      | First | 15-01-1990 | 15-01-2008       | 15-01-2009  | 01-01-2009   |   false    | First        | 15-01-2009         |
+      | First | 15-01-1990 | 15-01-2008       | 15-01-2009  | 15-01-2010   |   true     | Thirs        | 15-01-2012         |
+
+* in general i found it useful to split the features into two aspects, "when do licenses expire" and "what class and expiry has the pilot when the previous on expires" but you don't necessarily have to do that 
+
+"""
 
 
     @First-Class-Pilots-Journey-Scenarios
